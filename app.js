@@ -7,7 +7,7 @@ const statusPanel = document.querySelector('#status');
 const reportPanel = document.querySelector('#report');
 const analyzeButton = document.querySelector('#analyze-button');
 
-const STORAGE_TOKEN_KEY = 'repo-roster-github-token';
+const STORAGE_TOKEN_KEY = 'repo-roaster-github-token';
 const COLORS = ['#60a5fa', '#a78bfa', '#22d3ee', '#36d399', '#fbbf24', '#fb7185', '#f472b6', '#c084fc'];
 
 const CANDIDATES = {
@@ -240,56 +240,56 @@ function generateSections(data) {
   const appType = signals.frontend && signals.server ? 'full-stack' : signals.frontend ? 'frontend' : signals.server ? 'backend/API' : `${primary} project`;
 
   const whatItDoes = repo.description
-    ? `${repo.full_name} appears to be a ${appType} focused on: ${repo.description}`
-    : `${repo.full_name} appears to be a ${appType}. The README ${readme ? 'provides additional context' : 'is missing, so the product story is inferred from files and repo metadata'}.`;
+    ? `${repo.full_name} looks like a ${appType} focused on: ${repo.description}`
+    : `${repo.full_name} looks like a ${appType}. The README ${readme ? 'adds some context' : 'is missing, so we are reading file tea leaves and GitHub metadata like responsible little goblins'}.`;
 
   const workingWell = [
-    signals.readme && readme.length > 1000 ? 'README has enough substance to explain the project instead of just waving from across the room.' : null,
-    signals.setup ? 'Setup/run instructions are present, which is excellent for demo recovery.' : null,
-    signals.startScript ? `Package scripts include ${scriptNames(packageInfo).join(', ')}, so local startup is discoverable.` : null,
-    signals.liveDemo ? 'A live demo/homepage signal exists, which helps evaluators see the product quickly.' : null,
-    signals.envExample ? 'Environment variables have an example file, reducing setup guesswork.' : null,
-    signals.frontend ? 'Frontend/UI files are present, so there is something visual to demo.' : null,
-    languageNames.length ? `Language breakdown is available across ${languageNames.slice(0, 3).join(', ')}${languageNames.length > 3 ? ', and more' : ''}.` : null
+    signals.readme && readme.length > 1000 ? 'README has real substance — not just a title and a dream in a trench coat.' : null,
+    signals.setup ? 'Setup/run instructions are present, which means demo recovery has a parachute.' : null,
+    signals.startScript ? `Package scripts include ${scriptNames(packageInfo).join(', ')}, so local startup is not a treasure hunt.` : null,
+    signals.liveDemo ? 'A live demo/homepage signal exists, so people can see the thing without summoning npm spirits first.' : null,
+    signals.envExample ? 'Environment variables have an example file, reducing “which secret goes where?” panic.' : null,
+    signals.frontend ? 'Frontend/UI files are present, so there is something visual to point at proudly.' : null,
+    languageNames.length ? `Language breakdown is available across ${languageNames.slice(0, 3).join(', ')}${languageNames.length > 3 ? ', and more' : ''} — the ingredient label is readable.` : null
   ].filter(Boolean);
 
   const breaks = [
-    !signals.liveDemo ? 'No obvious live demo link detected; the presenter may need to run it locally.' : null,
-    !signals.setup ? 'Setup instructions are weak or missing, which is how demos become archaeology.' : null,
-    envReferenced && !signals.envExample ? 'Environment variables are referenced, but no .env example was detected.' : null,
+    !signals.liveDemo ? 'No obvious live demo link detected; the presenter may need to run it locally and pray to the demo gods.' : null,
+    !signals.setup ? 'Setup instructions are weak or missing, which is how demos become archaeology with snacks.' : null,
+    envReferenced && !signals.envExample ? 'Environment variables are referenced, but no .env example was detected — classic “works on my machine” seasoning.' : null,
     signals.server && !signals.ci ? 'Server/API code exists without CI signals, so regressions may sneak in wearing sunglasses.' : null,
-    !signals.tests ? 'No test signals detected; the happy path should be manually rehearsed.' : null,
-    files.length > 500 ? 'Large repo tree may make browser-side inspection slower under GitHub API limits.' : null
+    !signals.tests ? 'No test signals detected; rehearse the happy path like it owes you money.' : null,
+    files.length > 500 ? 'Large repo tree may make browser-side inspection slower under GitHub API limits; hydrate accordingly.' : null
   ].filter(Boolean);
 
   const engineeringGaps = [
-    !signals.tests ? 'Add at least smoke tests for the main user flow.' : null,
-    !signals.ci ? 'Add a minimal GitHub Actions workflow for lint/test/build or static validation.' : null,
-    envReferenced && !signals.envExample ? 'Document required environment variables in .env.example.' : null,
-    packagePath && packageInfo.name && !signals.startScript ? 'Add clear npm scripts for start/dev/test.' : null,
-    !signals.license ? 'Add a license if this is intended for reuse.' : null,
-    !signals.deploy ? 'Add deployment configuration or deployment notes.' : null
+    !signals.tests ? 'Add at least smoke tests for the main user flow, because vibes are not a test runner.' : null,
+    !signals.ci ? 'Add a minimal GitHub Actions workflow for lint/test/build so broken commits do not enter in fake glasses.' : null,
+    envReferenced && !signals.envExample ? 'Document required environment variables in .env.example before future-you starts guessing passwords from vibes.' : null,
+    packagePath && packageInfo.name && !signals.startScript ? 'Add clear npm scripts for start/dev/test so reviewers do not need a decoder ring.' : null,
+    !signals.license ? 'Add a license if this is intended for reuse; otherwise everyone just stares politely.' : null,
+    !signals.deploy ? 'Add deployment configuration or deployment notes so the app has a runway, not just wings.' : null
   ].filter(Boolean);
 
   const productGaps = [
-    !repo.description ? 'Add a crisp GitHub repo description so the project explains itself before the README loads.' : null,
-    !signals.liveDemo ? 'Add a hosted demo link or screenshots to make the value visible immediately.' : null,
-    !/features|what it does|use case|problem|why/i.test(readme) ? 'State the user problem and the core value proposition more explicitly.' : null,
-    !/screenshot|demo|gif|video/i.test(readme) ? 'Add screenshots or a short demo GIF for faster comprehension.' : null,
-    readiness !== 'Green' ? 'Frame it as a prototype and name the known demo-safe path.' : null
+    !repo.description ? 'Add a crisp GitHub repo description so the project introduces itself instead of standing silently at the party.' : null,
+    !signals.liveDemo ? 'Add a hosted demo link or screenshots so the value is visible before attention spans evaporate.' : null,
+    !/features|what it does|use case|problem|why/i.test(readme) ? 'State the user problem and core value proposition more explicitly — make the “why” wear a name tag.' : null,
+    !/screenshot|demo|gif|video/i.test(readme) ? 'Add screenshots or a short demo GIF; humans love proof, especially shiny proof.' : null,
+    readiness !== 'Green' ? 'Frame it as a prototype and name the demo-safe path so nobody free-solos the riskiest feature live.' : null
   ].filter(Boolean);
 
   const fixes = [
-    !signals.setup ? 'Write a 5-command quickstart in the README.' : null,
+    !signals.setup ? 'Write a 5-command quickstart in the README. Future users should not need a séance.' : null,
     envReferenced && !signals.envExample ? 'Add .env.example with every required variable and safe placeholder values.' : null,
-    !signals.liveDemo ? 'Add a demo URL, screenshot, or GIF near the top of the README.' : null,
+    !signals.liveDemo ? 'Add a demo URL, screenshot, or GIF near the top of the README — make the wow happen early.' : null,
     !signals.tests ? 'Add one smoke test or manual test checklist for the golden path.' : null,
-    !signals.ci ? 'Add a tiny GitHub Actions workflow to catch broken installs/builds.' : null,
+    !signals.ci ? 'Add a tiny GitHub Actions workflow to catch broken installs/builds before they wear a suit to the demo.' : null,
     !repo.description ? 'Add a one-line repo description in GitHub settings.' : null,
-    packagePath && packageInfo.name && !signals.startScript ? 'Add start/dev scripts so reviewers do not guess commands.' : null
+    packagePath && packageInfo.name && !signals.startScript ? 'Add start/dev scripts so reviewers do not guess commands like a coding escape room.' : null
   ].filter(Boolean).slice(0, 5);
 
-  while (fixes.length < 5) fixes.push(['Rehearse the main demo path and document the fallback.', 'Add one known-good sample input/query.', 'Tighten README wording around what is prototype vs done.', 'Remove unused files or document why they exist.', 'Add troubleshooting notes for common setup failures.'][fixes.length]);
+  while (fixes.length < 5) fixes.push(['Rehearse the main demo path and document the fallback — every demo needs a stunt double.', 'Add one known-good sample input/query.', 'Tighten README wording around what is prototype vs done.', 'Remove unused files or document why they exist; mystery files are how repos grow attic ghosts.', 'Add troubleshooting notes for common setup failures.'][fixes.length]);
 
   const roast = makeRoast({ repo, signals, readiness, files, readme, dependencyCount });
 
@@ -330,7 +330,7 @@ function renderReport(analysis) {
   reportPanel.innerHTML = `
     <div class="report-hero">
       <article class="repo-title glass-card">
-        <p class="eyebrow">Repo Roster Report</p>
+        <p class="eyebrow">Repo Roaster Report</p>
         <h2>${escapeHtml(repo.full_name)}</h2>
         <p>${escapeHtml(repo.description || 'No GitHub description provided.')}</p>
         <div class="repo-meta">

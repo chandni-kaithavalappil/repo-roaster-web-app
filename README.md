@@ -1,8 +1,8 @@
-# Repo Roster
+# Repo Roaster
 
-Paste a public GitHub repository URL and get a practical, visual demo-readiness report with real repo stats, scores, engineering gaps, product/story gaps, top fixes, and a friendly roast.
+Paste a public GitHub repository URL and get a practical, visual demo-readiness report with real repo stats, scores, engineering gaps, product/story gaps, top fixes, and a friendly roast. The tone is intentionally a little funny, but still respectful and useful.
 
-Repo Roster is designed for prototype and demo readiness reviews. It is not a production security audit and it does not modify the repositories it inspects.
+Repo Roaster is designed for prototype and demo readiness reviews. It is not a production security audit and it does not modify the repositories it inspects.
 
 ## Features
 
@@ -20,7 +20,7 @@ Repo Roster is designed for prototype and demo readiness reviews. It is not a pr
   - license
   - live demo/homepage
   - deploy config
-- Generate a structured Repo Roster Report:
+- Generate a structured Repo Roaster Report:
   1. What this repo does
   2. What is working well
   3. Demo readiness score: Green / Amber / Red
@@ -37,7 +37,7 @@ Repo Roster is designed for prototype and demo readiness reviews. It is not a pr
 After GitHub Pages is enabled, the app will be available at:
 
 ```text
-https://chandni-kaithavalappil.github.io/repo-roster-web-app/
+https://chandni-kaithavalappil.github.io/repo-roaster-web-app/
 ```
 
 ## How it works
@@ -55,7 +55,7 @@ The app then uses deterministic static heuristics to calculate demo-readiness si
 
 ### What "static heuristics" means
 
-Repo Roster does not run the target repo, clone it, execute tests, or send the code to an AI model. It reads public metadata and selected public files, then applies deterministic rules of thumb in `app.js`.
+Repo Roaster does not run the target repo, clone it, execute tests, or send the code to an AI model. It reads public metadata and selected public files, then applies deterministic rules of thumb in `app.js`.
 
 Examples of the signals it checks:
 
@@ -81,8 +81,8 @@ No target repository is cloned or modified.
 Clone this repository:
 
 ```bash
-git clone https://github.com/chandni-kaithavalappil/repo-roster-web-app.git
-cd repo-roster-web-app
+git clone https://github.com/chandni-kaithavalappil/repo-roaster-web-app.git
+cd repo-roaster-web-app
 ```
 
 Serve the static files locally:
@@ -118,7 +118,7 @@ This repo is intended to be hosted from the root of the `main` branch.
 The app should appear at:
 
 ```text
-https://chandni-kaithavalappil.github.io/repo-roster-web-app/
+https://chandni-kaithavalappil.github.io/repo-roaster-web-app/
 ```
 
 ## Rate limits
