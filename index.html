@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Repo Roster — Demo Readiness Reports for GitHub Repos</title>
+  <meta name="description" content="Paste a public GitHub repo and get a visual demo-readiness report with real stats, scores, risks, gaps, fixes, and a friendly roast." />
+  <meta name="theme-color" content="#08090d" />
+  <link rel="preconnect" href="https://api.github.com" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="background-orbs" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="grid-glow"></span>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Repo Roster home">
+      <span class="brand-mark">RR</span>
+      <span>
+        <strong>Repo Roster</strong>
+        <small>Prototype readiness, with receipts.</small>
+      </span>
+    </a>
+    <nav class="header-actions" aria-label="Helpful links">
+      <a href="https://github.com/chandni-kaithavalappil/repo-roster-web-app" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="#how-it-works">How it works</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Public GitHub repo inspector</p>
+        <h1>Find out if your repo is demo-ready — or just wearing a blazer.</h1>
+        <p class="hero-subtitle">Paste a public GitHub repository URL. Repo Roster fetches real project signals, scores demo readiness, surfaces risks, and delivers one respectful roast.</p>
+      </div>
+
+      <form id="repo-form" class="search-card" autocomplete="off">
+        <label for="repo-input">GitHub repository</label>
+        <div class="input-row">
+          <input id="repo-input" name="repo" type="text" required placeholder="https://github.com/chandni-kaithavalappil/movie-semantic-search" />
+          <button id="analyze-button" type="submit">Roast my repo</button>
+        </div>
+        <details class="token-details">
+          <summary>Optional: GitHub token for higher rate limits</summary>
+          <label for="token-input">Token stays in this browser only. Do not use this on shared computers.</label>
+          <input id="token-input" type="password" placeholder="github_pat_..." autocomplete="off" />
+          <div class="token-actions">
+            <button id="save-token" type="button">Save locally</button>
+            <button id="clear-token" type="button" class="ghost-button">Clear</button>
+          </div>
+        </details>
+        <p class="hint">Supports <code>owner/repo</code>, <code>github.com/owner/repo</code>, and full GitHub URLs. Public repos only.</p>
+      </form>
+    </section>
+
+    <section class="example-strip" aria-label="Try examples">
+      <span>Try:</span>
+      <button class="example" data-repo="chandni-kaithavalappil/movie-semantic-search">movie-semantic-search</button>
+      <button class="example" data-repo="facebook/react">facebook/react</button>
+      <button class="example" data-repo="vercel/next.js">vercel/next.js</button>
+    </section>
+
+    <section id="status" class="status-panel hidden" aria-live="polite"></section>
+    <section id="report" class="report hidden" aria-live="polite"></section>
+
+    <section id="how-it-works" class="info-section">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2>Static, read-only, GitHub Pages friendly.</h2>
+      </div>
+      <div class="info-grid">
+        <article>
+          <span class="info-icon">1</span>
+          <h3>Fetch signals</h3>
+          <p>Repo metadata, languages, tree, README, package files, server-ish files, CI, tests, deploy hints, and docs clues.</p>
+        </article>
+        <article>
+          <span class="info-icon">2</span>
+          <h3>Score readiness</h3>
+          <p>Heuristics turn evidence into demo-readiness, documentation, setup, reliability, organization, story, and polish scores.</p>
+        </article>
+        <article>
+          <span class="info-icon">3</span>
+          <h3>Render the report</h3>
+          <p>A visual dashboard shows stats, risks, gaps, top fixes, and a roast that stays funny without being feral.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built for prototype/demo readiness reviews. Not a security audit. Does not clone or modify target repos.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
