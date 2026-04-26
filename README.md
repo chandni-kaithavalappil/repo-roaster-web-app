@@ -51,7 +51,28 @@ GET https://api.github.com/repos/{owner}/{repo}/git/trees/{default_branch}?recur
 GET https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/{path}
 ```
 
-The app then uses deterministic heuristics to calculate demo-readiness signals and generate the report.
+The app then uses deterministic static heuristics to calculate demo-readiness signals and generate the report.
+
+### What "static heuristics" means
+
+Repo Roster does not run the target repo, clone it, execute tests, or send the code to an AI model. It reads public metadata and selected public files, then applies deterministic rules of thumb in `app.js`.
+
+Examples of the signals it checks:
+
+- Is there a README?
+- Does the README include setup or run instructions?
+- Is there a package/dependency file such as `package.json`, `requirements.txt`, `pyproject.toml`, `go.mod`, or `Cargo.toml`?
+- Are there start/dev/test scripts?
+- Are there test files or test folders?
+- Is there CI under `.github/workflows/`?
+- Is there an `.env.example` or similar file when environment variables appear to be used?
+- Is there a license?
+- Is there a live demo/homepage or deploy config?
+- What languages, file count, repo size, stars, forks, issues, and last-updated date does GitHub report?
+
+Those signals are converted into scores and report sections using transparent rules. For example, setup docs, tests, CI, a license, and a live demo raise the score; missing tests, CI, setup docs, or env examples lower it.
+
+This makes the app fast, free, explainable, and safe to host on GitHub Pages. The tradeoff is that it is a prototype-readiness signal checker, not a deep code review, security audit, or production-readiness assessment.
 
 No target repository is cloned or modified.
 
@@ -118,7 +139,7 @@ Do not use the optional token feature on shared computers.
 
 ## Limitations
 
-- Static heuristics are useful signals, not a full code audit.
+- Static heuristics are useful prototype-readiness signals, not a full code audit. The app does not run code, execute tests, or make AI/LLM calls.
 - Public repos only.
 - Very large repos may be slow or hit GitHub API limits.
 - GitHub Pages cannot safely hide API keys. Do not add private LLM keys directly to frontend code.
